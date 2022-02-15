@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','App\Http\Controllers\TransactionController@index');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard','App\Http\Controllers\TransactionController@dash_home',function (){
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard','App\Http\Controllers\ProductController@index',function (){
 })->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->resource('/product', ProductController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/destroy/{id}', 'App\Http\Controllers\ProductController@destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/product/edit/{id}', 'App\Http\Controllers\ProductController@edit');
+Route::middleware(['auth:sanctum', 'verified'])->put('dashboard/product/update/{id}', 'App\Http\Controllers\ProductController@update');
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/transaksi','App\Http\Controllers\TransactionController@dash_transaksi',function (){
 })->name('transaksi');
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/laporan','App\Http\Controllers\TransactionController@dash_laporan',function (){
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/laporan','App\Http\Controllers\LaporanController@index',function (){
 })->name('laporan');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/log','App\Http\Controllers\TransactionController@dash_log',function (){
 })->name('log');

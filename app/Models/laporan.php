@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class product extends Model
+class laporan extends Model
 {
-    // use HasFactory;
-    protected $fillable = ['kode_produk','product_name', 'amount','value'];
+    use HasFactory;
 }

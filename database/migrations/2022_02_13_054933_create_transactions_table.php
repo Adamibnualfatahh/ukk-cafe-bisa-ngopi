@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->integer('id_transaksi');
             $table->integer('id_user');
-            $table->date('tgl_trans');
             $table->string('kode_produk');
             $table->integer('value_product');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

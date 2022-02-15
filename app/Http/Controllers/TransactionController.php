@@ -32,11 +32,7 @@ class TransactionController extends Controller
         $randomString = Str::random(5);
         return view('dashboard.index',['random' => $randomString]);
     }
-    public function dash_laporan()
-    {
-        $randomString = Str::random(5);
-        return view('dashboard.laporan',['random' => $randomString]);
-    }
+   
 
     public function dash_log()
     {

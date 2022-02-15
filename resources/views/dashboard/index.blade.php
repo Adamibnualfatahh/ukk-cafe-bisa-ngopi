@@ -56,9 +56,39 @@
         </div>
         
         <div class="mt-10">
+
+             <div class="form-control mb-3">
+                 <form action="/dashboard">
+                <div class="flex space-x-2">
+                    <label class="label">
+                        <p class=" label-text text-bold" >Cari Data</p>
+                    </label>
+                    <input type="text" placeholder="Search" name="search" class="w-full input input-light input-bordered"> 
+                    <button class="btn btn-light">Cari</button>
+                </div>
+                </form>
+            </div>
+            
+
             <h2 class="font-bold">Menu Cafe Bisa Ngopi</h2>
-            <label class="btn btn-error btn-sm mt-5 mb-5" for="my-modal-2">Tambah Produk +</label>
+            <label class="btn btn-error btn-sm mt-5 mb-5" for="my-modal-1">Tambah Produk +</label>
+           
             <div class="overflow-x-auto">
+                
+                <div tabindex="0" class="mb-5 collapse border bg-base-0 rounded-box collapse-arrow">
+                <div class="collapse-title text-xl font-medium">
+                    Produk Yang Sudah Habis
+                </div>
+                <div class="collapse-content"> 
+                    
+                @forelse ($habis as $habis)
+                <p class="font-bold mb-2"> - {{ $habis->product_name }} Dengan Kode {{ $habis->kode_produk }} Telah Habis</p>           
+                 @empty
+                   <p>Produk Masih Aman Semua</p>         
+                 @endforelse
+                </div>
+                </div>
+
                 <table class="table w-full">
                     <thead>
                     <tr>
@@ -69,18 +99,26 @@
                         <th>Jumlah</th>
                         <th>Action</th>
                     </tr>
-                    </thead> 
+                    </thead>                   
+                    
                     <tbody>
-                    <tr>
-                        <th>1</th> 
-                        <td class="font-bold">KD02W</td> 
-                        <td>Coffe Late</td> 
-                        <td>Rp.100,000</td>
-                        <td>300</td>
+                        @forelse ($product as $product)
+                        <tr>
+                        <th>{{ $i++ }}</th> 
+                        <td class="font-bold">{{ $product->kode_produk }}</td> 
+                        <td>{{ $product->product_name }}</td> 
+                        <td>{{ $product->amount }}</td>
+                        <td>{{ $product->value }}</td>
                         <td>
-                            <button class="btn btn-sm btn-info">Ubah</button> <button class="btn btn-sm btn-error">Hapus</button>
+                            <a href="/dashboard/product/edit/{{ $product->id }}" class="btn btn-sm btn-info" >Ubah</a> <a class="btn btn-sm btn-error" href="/dashboard/destroy/{{ $product->id }}">Hapus</a>
                         </td>
-                    </tr>
+                        </tr>
+                        @empty
+                        <div class="place-self-center">
+                            <td class="font-bold text-5xl" colspan="5">Produk Tidak Ditemukan</td>    
+                        </div>
+                        @endforelse
+                    
                     </tbody>
                 </table>
             </div>
@@ -89,40 +127,84 @@
 
 
     {{-- modal --}}
-    <input type="checkbox" id="my-modal-2" class="modal-toggle"> 
+    <input type="checkbox" id="my-modal-1" class="modal-toggle"> 
     <div class="modal">
     <div class="modal-box">
+        <form action="{{ route('product.store') }}"  enctype="multipart/form-data" method="POST">
+            @csrf
         <div class="p-10 card bg-base-200">
         <div class="form-control">
 
             <label class="label">
             <span class="label-text">Kode</span>
             </label> 
-            <input type="text" placeholder="{{ $random }}" class="input" value="{{ $random }}" disabled>
+            <input type="text" placeholder="{{ $random }}" class="input" value="{{ $random }}" name="kode_produk" readonly>
 
              <label class="label">
             <span class="label-text">Nama</span>
             </label> 
-            <input type="text" placeholder="Nama" class="input">
+            <input type="text" placeholder="Nama" class="input" name="product_name"> 
 
              <label class="label">
             <span class="label-text">Harga</span>
             </label> 
-            <input type="number" placeholder="Harga" class="input">
+            <input type="number" placeholder="Harga" class="input" name="amount">
 
              <label class="label">
             <span class="label-text">Jumlah</span>
             </label> 
-            <input type="number" placeholder="Jumlah" class="input">
+            <input type="number" placeholder="Jumlah" class="input" name="value">
         </div>
         </div>
 
         <div class="modal-action">
-        <label for="my-modal-2" class="btn btn-primary">Accept</label> 
-        <label for="my-modal-2" class="btn">Close</label>
+        <button for="my-modal-1" class="btn btn-primary" type="submit">Kirim</button> 
+        <label for="my-modal-1" class="btn">Close</label>
         </div>
+        </form>
     </div>
     </div>
 
+
+
+    {{-- modal 2 --}}
+
+    <input type="checkbox" id="my-modal-2" class="modal-toggle"> 
+    <div class="modal">
+        <div class="modal-box">
+           <form action=""  enctype="multipart/form-data" method="POST">
+            @csrf
+        <div class="p-10 card bg-base-200">
+        <div class="form-control">
+
+            <label class="label">
+            <span class="label-text">Kode</span>
+            </label> 
+            <input type="text" placeholder="{{ $random }}" class="input" value="{{ $random }}" name="kode_produk" readonly>
+
+             <label class="label">
+            <span class="label-text">Nama</span>
+            </label> 
+            <input type="text" placeholder="Nama" class="input" name="product_name"> 
+
+             <label class="label">
+            <span class="label-text">Harga</span>
+            </label> 
+            <input type="number" placeholder="Harga" class="input" name="amount">
+
+             <label class="label">
+            <span class="label-text">Jumlah</span>
+            </label> 
+            <input type="number" placeholder="Jumlah" class="input" name="value">
+        </div>
+        </div>
+
+        <div class="modal-action">
+        <button for="my-modal-2" class="btn btn-primary" type="submit">Kirim</button> 
+        <label for="my-modal-2" class="btn">Close</label>
+        </div>
+        </form>
+        </div>
+    </div>
 </body>
 </html>

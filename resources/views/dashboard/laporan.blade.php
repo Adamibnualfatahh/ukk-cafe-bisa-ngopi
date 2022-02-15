@@ -75,7 +75,7 @@
                         <h2 class="font-bold">Per Bulan</h2>
                         <table class="table w-full">
                             <thead>
-                            <tr>
+                            <tr> {{ $feb }}
                                 <th>#</th> 
                                 <th>Waktu</th> 
                                 <th>Penghasilan</th> 
