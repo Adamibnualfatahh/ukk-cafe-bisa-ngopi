@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de68f95e4c1afad6259950781c296257",
+    "content-hash": "1cba638bcb6bb38b014762036849d810",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2695,6 +2695,92 @@
                 }
             ],
             "time": "2021-12-04T23:24:31+00:00"
+        },
+        {
+            "name": "picqer/php-barcode-generator",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/picqer/php-barcode-generator.git",
+                "reference": "49022793ff09569c57a2621ba58a191db5a421c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/picqer/php-barcode-generator/zipball/49022793ff09569c57a2621ba58a191db5a421c4",
+                "reference": "49022793ff09569c57a2621ba58a191db5a421c4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "suggest": {
+                "ext-bcmath": "Barcode IMB (Intelligent Mail Barcode) needs bcmath extension",
+                "ext-gd": "For JPG and PNG generators, GD or Imagick is required",
+                "ext-imagick": "For JPG and PNG generators, GD or Imagick is required"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Picqer\\Barcode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nicola Asuni",
+                    "email": "info@tecnick.com",
+                    "homepage": "http://nicolaasuni.tecnick.com"
+                },
+                {
+                    "name": "Casper Bakker",
+                    "email": "info@picqer.com",
+                    "homepage": "https://picqer.com"
+                }
+            ],
+            "description": "An easy to use, non-bloated, barcode generator in PHP. Creates SVG, PNG, JPG and HTML images from the most used 1D barcode standards.",
+            "homepage": "https://github.com/picqer/php-barcode-generator",
+            "keywords": [
+                "CODABAR",
+                "Code11",
+                "Code93",
+                "EAN13",
+                "KIX",
+                "KIXCODE",
+                "MSI",
+                "POSTNET",
+                "Pharma",
+                "Standard 2 of 5",
+                "barcode",
+                "barcode generator",
+                "code128",
+                "code39",
+                "ean",
+                "html",
+                "jpeg",
+                "jpg",
+                "php",
+                "png",
+                "svg",
+                "upc"
+            ],
+            "support": {
+                "issues": "https://github.com/picqer/php-barcode-generator/issues",
+                "source": "https://github.com/picqer/php-barcode-generator/tree/v2.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/casperbakker",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-07T09:48:37+00:00"
         },
         {
             "name": "pragmarx/google2fa",

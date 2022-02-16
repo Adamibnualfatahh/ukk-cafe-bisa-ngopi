@@ -62,7 +62,7 @@ class ProductController extends Controller
     
         product::create($input);
      
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with(['success' => 'Berhasil Ditambahkan','error'=>'Ada Kesalahan Saat Input Data']);
     }
 
     /**
@@ -106,7 +106,7 @@ class ProductController extends Controller
         ]);
          $input = $request->all();
          $product->update($input);
-         return redirect('/dashboard');
+         return redirect('/dashboard')->with(['success' => 'Data Berhasil Diubah']);
     }
 
     /**
@@ -118,6 +118,6 @@ class ProductController extends Controller
     public function destroy(product $product , $id)
     {
         DB::table('products')->where('id', $id)->delete();
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with(['success' => 'Data Berhasil Dihapus']);
     }
 }

@@ -46,6 +46,35 @@
     </div> 
     </div>
 
+    @if ($message = Session::get('success'))
+    <form action="">
+       <div class="alert shadow-lg">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info-content flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>{{ $message }}</span>
+        </div>
+        <div class="flex-none">
+            <button class="btn btn-sm btn-primary" onclick="event.preventDefault();this.closest('form').submit();">OKE</button>
+        </div>
+        </div>
+    </form>
+    @endif
+
+    @if ($message = Session::get('error'))
+    <form action="">
+       <div class="alert shadow-lg">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info-content flex-shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>{{ $message }}</span>
+        </div>
+        <div class="flex-none">
+            <button class="btn btn-sm btn-primary" onclick="event.preventDefault();this.closest('form').submit();">OKE</button>
+        </div>
+        </div>
+    </form>
+    @endif
+   
+
     <div class="container m-10">
        
 
@@ -97,6 +126,7 @@
                         <th>Nama</th> 
                         <th>Harga</th>
                         <th>Jumlah</th>
+                        {{-- <td>QR Code</td> --}}
                         <th>Action</th>
                     </tr>
                     </thead>                   
@@ -109,6 +139,14 @@
                         <td>{{ $product->product_name }}</td> 
                         <td>{{ $product->amount }}</td>
                         <td>{{ $product->value }}</td>
+                       
+                        {{-- <td> <h3>Product {{ $product->kode_produk }} - {{ $product->product_name }}</h3> 
+                            @php
+                            $generatorPNG = new Picqer\Barcode\BarcodeGeneratorPNG();
+                        @endphp
+                        <img src="data:image/png;base64,{{ base64_encode($generatorPNG->getBarcode("{{{ $product->kode_produk }}}", $generatorPNG::TYPE_CODE_128)) }}">
+                        </td> --}}
+                        
                         <td>
                             <a href="/dashboard/product/edit/{{ $product->id }}" class="btn btn-sm btn-info" >Ubah</a> <a class="btn btn-sm btn-error" href="/dashboard/destroy/{{ $product->id }}">Hapus</a>
                         </td>

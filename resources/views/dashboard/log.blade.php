@@ -57,19 +57,22 @@
                     <tr>
                         <th>#</th> 
                         <th>Nama</th> 
-                        <th>Waktu Masuk</th> 
-                        <th>Waktu Keluar</th>
-                        <th>Tanggal Masuk</th>
+                        <th>IP</th> 
+                        <th>Aktif Terakhir</th>
                     </tr>
                     </thead> 
                     <tbody>
-                    <tr>
-                        <th>1</th> 
-                        <td>Yuni</td> 
-                        <td>05:40:35</td> 
-                        <td>13:40:00</td>
-                        <td>10-09-2022</td>
-                    </tr>
+                   
+                        @foreach ($data as $data)
+                        <tr>
+                            <th>{{ $i++ }}</th> 
+                            <td>{{ $data->name }}</td> 
+                            <td>{{ $data->ip_address }}</td> 
+                            <td>{{ gmdate("d F Y || H:i:s", $data->last_activity)  }}</td>
+                            <td></td>
+                        </tr>
+                         @endforeach
+                    
                     </tbody>
                 </table>      
 

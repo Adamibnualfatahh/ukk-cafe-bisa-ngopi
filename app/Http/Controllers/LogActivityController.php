@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\log_activity;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Storelog_activityRequest;
 use App\Http\Requests\Updatelog_activityRequest;
 
@@ -13,6 +16,17 @@ class LogActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+      public function dash_log()
+    {
+         $data = DB::select('SELECT * FROM  sessions INNER JOIN users ON sessions.user_id = 
+        users.id');
+        
+        $i = 1;
+       
+        return view('dashboard.log',['data' => $data,'i'=>$i]);
+    }
+    
     public function index()
     {
         //

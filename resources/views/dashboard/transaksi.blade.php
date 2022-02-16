@@ -50,13 +50,15 @@
         <div class="mt-10">
             
             <div class="form-control mb-3">
+                 <form action="/dashboard/transaksi">
                 <div class="flex space-x-2">
                     <label class="label">
-                        <span class=" label-text">Cari Data Transaksi</span>
+                        <p class=" label-text text-bold" >Cari Data</p>
                     </label>
-                    <input type="text" placeholder="Search" class="w-full input input-light input-bordered"> 
+                    <input type="text" placeholder="Search" name="search" class="w-full input input-light input-bordered"> 
                     <button class="btn btn-light">Cari</button>
                 </div>
+                </form>
             </div>
 
         
@@ -79,7 +81,10 @@
                 <button class="w-full mt-2 btn btn-dark mb-5" type="submit">Cari</button>
             </form>
                   
-
+ {{-- $query = $this->db->query('SELECT * FROM transaksi INNER JOIN karyawan ON transaksi.idkaryawan = karyawan.idkaryawan INNER JOIN gaji ON karyawan.golongan = gaji.golongan');
+ 
+            foreach ($query->result() as $row) --}}
+ 
             <h2 class="font-bold">Transaksi</h2>
             <div class="overflow-x-auto">
                 <table class="table w-full">
@@ -88,24 +93,28 @@
                         <th>ID Trans</th> 
                         <th>Nama Kasir</th> 
                         <th>Waktu Transaksi</th> 
-                        <th>Kode Produk</th>
+                        <th>Produk</th>
                         <th>Jumlah</th>
                         <th>Total</th>
-                        <td>Action</td>
+                        {{-- <td>Action</td> --}}
                     </tr>
                     </thead> 
                     <tbody>
-                    <tr>
-                        <th>1</th> 
-                        <td>Kin</td> 
-                        <td>13-02-2022</td> 
-                        <td>KD02W</td>
-                        <td>2</td>
-                        <td>200,000</td>
-                        <td>
+                    
+                        @foreach ($query as $item)
+                        <tr>
+                        <th>{{ $i++}}</th> 
+                        <td>{{ $item->name }}</td> 
+                        <td>{{ $item->created_at}}</td> 
+                        <td>{{ $item->kode_produk }} || {{ $item->product_name }}</td>
+                        <td>{{ $item->value_product }}</td>
+                        <td>{{ $item->value_product * $item->amount }}</td>
+                        {{-- <td>
                             <button class="btn btn-sm btn-info">Ubah</button> <button class="btn btn-sm btn-error">Hapus</button>
-                        </td>
-                    </tr>
+                        </td> --}}
+                        </tr>
+                        @endforeach
+                    
                     </tbody>
                 </table>
             </div>

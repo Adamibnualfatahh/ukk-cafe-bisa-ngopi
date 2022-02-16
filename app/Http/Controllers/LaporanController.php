@@ -20,12 +20,12 @@ class LaporanController extends Controller
      */
     public function index()
     {
-
-       $feb =  DB::table('transactions')->where('created_at','LIKE','%-02-%')
+//  $feb = DB::select('SELECT * FROM transactions WHERE created_at GROUP BY ');
+      $feb  =  DB::table('transactions')->where('created_at','LIKE','%-02-%')
                       ->get('value_product');
-  
+
         $randomString = Str::random(5);
-        return view('dashboard.laporan',['random' => $randomString,'feb'=> $feb]);
+        return view('dashboard.laporan',['random' => $randomString,'feb'=> $feb,]);
     }
 
     /**

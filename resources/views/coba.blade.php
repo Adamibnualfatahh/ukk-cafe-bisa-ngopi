@@ -29,19 +29,16 @@
     </div> 
   </div>
 
-  <div class="hero min-h-screen bg-base-200">
-    <div class="text-center hero-content">
-      <div class="max-w-md">
-        <h1 class="mb-5 text-5xl font-bold ">
-              HALO SELAMAT DATANG
-            </h1> 
-        <p class="mb-5">
-             DI CAFE BISA NGOPI
-            </p> 
-        <a class="btn btn-primary" href="/login">Login</a>
-      </div>
+  <div class="hero min-h-screen" style="background-image: url(https://api.lorem.space/image/fashion?w=1000&h=800);">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="text-center hero-content text-neutral-content">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">Hello Semua</h1>
+      <p class="mb-5">Selamat Datang di Cafe Bisa Ngopi, Silahkan Login Untuk Masuk Kedalam WebSite</p>
+      <a href="/login"><button class="btn btn-primary">Login</button></a>
     </div>
   </div>
+</div>
 
 </body>
 </html>

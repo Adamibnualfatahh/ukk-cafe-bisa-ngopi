@@ -14,8 +14,9 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+// halaman Depan 
 Route::get('/','App\Http\Controllers\TransactionController@index');
-
+// Dashboard Menu
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard','App\Http\Controllers\ProductController@index',function (){
 })->name('dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->resource('/product', ProductController::class);
@@ -28,9 +29,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/transaksi','App
 })->name('transaksi');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/laporan','App\Http\Controllers\LaporanController@index',function (){
 })->name('laporan');
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/log','App\Http\Controllers\TransactionController@dash_log',function (){
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard/log','App\Http\Controllers\LogActivityController@dash_log',function (){
 })->name('log');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboards', function () {
     return view('dashboard');
 })->name('dashboards');
+
+
+// Kasir
+Route::get('/kasir','App\Http\Controllers\TransactionController@kasir');
