@@ -6,21 +6,7 @@
   <link href="/dist/output.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/daisyui@1.25.4/dist/full.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
-<style>
-  input[type='number']::-webkit-inner-spin-button,
-  input[type='number']::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  .custom-number-input input:focus {
-    outline: none !important;
-  }
-
-  .custom-number-input button:focus {
-    outline: none !important;
-  }
-</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
    <div class="navbar mb-2 shadow-lg bg-neutral ">
@@ -46,6 +32,14 @@
     </div>
    </div>
    <div class="overflow-x-auto">
+     {{-- <div class="form-control mb-3">
+                 <form action="/kasir">
+                <div class="flex space-x-2 m-5">
+                    <input type="text" placeholder="Search" name="search" class="w-full input input-light input-bordered "> 
+                    <button class="btn btn-light">Cari</button>
+                </div>
+                </form>
+            </div> --}}
   <table class="table w-full">
     <!-- head -->
     <thead>
@@ -54,6 +48,7 @@
         <th>Nama</th>
         <th>Harga /item</th>
         <th>Qty</th>
+        <th>Total Belanja per Item</th>
       </tr>
     </thead>
     <tbody>
@@ -62,36 +57,57 @@
       <tr>
         <th>{{ $i++ }}</th>
         <td>{{ $produk->product_name }}</td>
-        <td>{{ $produk->amount }}</td>
-        <td><!-- component -->
-            <div class="custom-number-input h-10 w-32">
-            <label for="custom-input-number" class="w-full text-gray-700 text-sm font-semibold">
-            </label>
-            <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-            <button data-action="decrement" class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
-                  <span class="m-auto text-2xl font-thin">−</span>
-            </button>
-            <input type="number" class="outline-none focus:outline-none text-center w-full bg-gray-300 font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none" name="custom-input-number" value="0"></input>
-            <button data-action="increment" class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
-            <span class="m-auto text-2xl font-thin">+</span>
-            </button>
-            </div>
-      </td>
+        <td class="price">{{ $produk->amount }}</td>
+        <td><input type="text" placeholder="Masukan jumlah Di sini" class="input w-full max-w-xs choose"></td>
+        <td><span class='total'>0</span></td>
       </tr>
       @endforeach
-      
-      <tr class="static bottom-0">
-            <td><button class="btn btn-error btn-sm" onclick="window.location.reload();">HITUNG ULANG</button></td>
-            <td><button class="btn btn-success btn-sm btn-outline">JUMLAH</button></td>
-            <td>TOTAL</td>
-            <td><input type="text" placeholder="Rp 1.000.000" class="input input-bordered w-full max-w-xs" disabled value="{{ $produk->value * $produk->amount }}"></td>
+      <tr>
+        <td colspan="5"></td>
       </tr>
+      <tr class="static bottom-0 active ">
+          <td>TOTAL</td>
+          <td colspan="3"><span id="sum"></span></td> 
+           <td><button class="btn btn-error btn-sm" onclick="window.location.reload();">HITUNG ULANG</button></td>
+        </tr>
+
+      {{-- <tr class="active">
+        <td>UANG CUSTOMER:</td>
+        <td><input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"></td>
+        <td>KEMBALIAN :</td>
+        <td><span class="kembali"></span></td>
+        <td><button class="btn btn-success btn-sm " id="tot">Simpan</button></td>
+      </tr> --}}
+
     </tbody>
   </table>
 </div>
+<script>
+calc_total();
+
+$(".choose").on('change', function(){
+  var parent = $(this).closest('tr');
+  var price  = parseFloat($('.price',parent).text());
+  var choose = parseFloat($('.choose',parent).val());
+  var sum = parseFloat($('.sum',parent).val());
+  var uang = parseFloat($('.uang',parent).val());
+  $('.total',parent).text(choose*price);
+  $('.kembali',parent).text(uang-sum);
+  calc_total();
+});
+
+function calc_total(){
+  var sum = 0;
+  $(".total").each(function(){
+    sum += parseFloat($(this).text());
+  });
+  $('#sum').text(sum);
+}
+</script>
+
 
    
-<script>
+{{-- <script>
   function decrement(e) {
     const btn = e.target.parentNode.parentElement.querySelector(
       'button[data-action="decrement"]'
@@ -127,6 +143,6 @@
   incrementButtons.forEach(btn => {
     btn.addEventListener("click", increment);
   });
-</script>
+</script> --}}
 </body>
 </html>

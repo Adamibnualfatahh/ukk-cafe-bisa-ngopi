@@ -46,6 +46,7 @@ class TransactionController extends Controller
 
      public function kasir()
     {
+        
         // ('SELECT SUM(amount) as jumlah FROM products');
         $i = 1;
         $produk =  DB::select('Select * FROM products where value > 0');
